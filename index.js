@@ -2,15 +2,11 @@ $(function () {
 	var isMouseDown = false;
 	var CurrentControl;
 
-	var winHalf = $(window).height() / 2;
-
 	var controls = $('.js-control');
+	var body = $('body');
+	var resultSVG = $('.js-dest');
 
-	var aspect = {
-		x: "xMin",
-		y: "YMin",
-		s: "meet"
-	}
+	var winHalf = body.height() / 2;
 
 	var viewPort = {
 		left: 10,
@@ -24,6 +20,12 @@ $(function () {
 		top: 50,
 		right: 250,
 		bottom: 250
+	};
+
+	var aspect = {
+		x: "xMin",
+		y: "YMin",
+		s: "meet"
 	};
 
 	controls.on('mousedown', function (event) {
@@ -40,17 +42,17 @@ $(function () {
 
 	$('.xa').on('change', function () {
 		aspect.x = $(this).val();
-		reDraw(viewPort, viewBox);
+		reDraw();
 	});
 
 	$('.ya').on('change', function () {
 		aspect.y = $(this).val();
-		reDraw(viewPort, viewBox);
+		reDraw();
 	});
 
 	$('.sa').on('change', function () {
 		aspect.s = $(this).val();
-		reDraw(viewPort, viewBox);
+		reDraw();
 	});
 
 	$('body').on('mousemove', function (event) {
@@ -75,11 +77,11 @@ $(function () {
 				viewBox.right = event.pageX;
 			}
 
-			reDraw(viewPort, viewBox);
+			reDraw();
 		}
 	});
 
-	var reDraw = function (viewPort, viewBox) {
+	var reDraw = function () {
 		controls.filter('.tr').css({
 			top: viewPort.top - 10,
 			left: viewPort.right - 10
@@ -120,22 +122,30 @@ $(function () {
 			top: viewBox.bottom - 10
 		}).text(viewBox.right + ',' + viewBox.bottom);
 
-		var vbText = (viewBox.left) + ' ' + (viewBox.top) + ' ' + (viewBox.right - viewBox.left) + ' ' + (viewBox.bottom - viewBox.top);
-		var aspectText = aspect.x + aspect.y + " " + aspect.s;
+		var viewBoxText = viewBox.left + ' ' + viewBox.top + ' ' + (viewBox.right - viewBox.left) + ' ' + (viewBox.bottom - viewBox.top);
+		var aspectText = aspect.s !== "none" ? aspect.x + aspect.y + " " + aspect.s : aspect.s;
 
-		$('.js-sizer').css({
+		$('.js-border').css({
+			top: viewBox.top,
+			left: viewBox.left,
+			width: viewBox.right - viewBox.left,
+			height: viewBox.bottom - viewBox.top
+		});
+
+		resultSVG.css({
 			top: viewPort.top,
 			left: viewPort.left,
 			width: viewPort.right - viewPort.left,
 			height: viewPort.bottom - viewPort.top
-		}).get(0).setAttribute("viewBox", vbText);
+		});
 
-		$('.js-sizer').get(0).setAttribute("preserveAspectRatio", aspect.s !== "none" ? aspectText : "none");
+		resultSVG.get(0).setAttribute("viewBox", viewBoxText);
+		resultSVG.get(0).setAttribute("preserveAspectRatio", aspectText);
 
 		$('.aspecttext').text(aspectText);
-		$('.viewboxtext').text(vbText);
+		$('.viewboxtext').text(viewBoxText);
 		$('.viewporttext').text('width: ' + (viewPort.right - viewPort.left) + '; height: ' + (viewPort.bottom - viewPort.top));
 	};
 
-	reDraw(viewPort, viewBox);
+	reDraw();
 });

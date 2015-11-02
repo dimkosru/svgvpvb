@@ -12,15 +12,21 @@ body {
     position: relative;
     height: 50%;
     width: 100%;
+    background-color: #fbfbfb;
 }
+
+.half:nth-of-type(2) {
+    background-color: gainsboro;
+ }
 
 .original {
     width: 100%;
     height: 100%;
 }
 
-.sizer {
+.dest {
     position: absolute;
+    border: 2px solid #0c3459;
 }
 
 .control {
@@ -44,4 +50,10 @@ body {
     top: 0;
     right: 0;
     display: inline-block;
+}
+
+.border {
+    position: absolute;
+    box-sizing: border-box;
+    border: 2px solid #ba3229;
 }

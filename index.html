@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>SVG</title>
     <link rel="stylesheet" href="index.css"/>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="index.js"></script>
 </head>
 <body>
 <div class="half all">
@@ -448,6 +450,7 @@
             <path class="fil1 str1" d="M158.166 149.92c0.075,-0.0233 0.1112,-0.1009 0.1035,-0.1655 -0.0078,-0.0647 -0.0596,-0.1165 -0.1449,-0.1527 -0.0853,-0.0362 -0.2044,-0.057 -0.2794,-0.0518 -0.075,0.0052 -0.1061,0.0363 -0.0958,0.0957 0.0104,0.0595 0.0622,0.1476 0.1449,0.207 0.0828,0.0595 0.1967,0.0906 0.2717,0.0673z"/>
         </g>
     </svg>
+    <div class="border js-border"></div>
     <div class="control red js-control btl"></div>
     <div class="control red js-control btr"></div>
     <div class="control red js-control bbr"></div>
@@ -473,7 +476,7 @@
     </div>
 </div>
 <div class="half viewport">
-    <svg class="sizer js-sizer" preserveAspectRatio="xMinYMin meet" >
+    <svg class="dest js-dest" preserveAspectRatio="xMinYMin meet" >
         <use xlink:href="#Layer_x0020_1" x="0" y="0" />
     </svg>
     <div class="control js-control tl"></div>
@@ -482,7 +485,5 @@
     <div class="control js-control bl"></div>
     <div class="label">Viewport: <span class="viewporttext"></span></div>
 </div>
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="index.js"></script>
 </body>
 </html>
